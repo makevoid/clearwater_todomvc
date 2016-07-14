@@ -18,25 +18,10 @@ class InvoiceItem
 
   def render
     div([
-      if editing?
-        input(
-          class_name: 'edit',
-          default_value: invoice.name,
-          onkeydown: method(:handle_edit_key_down),
-          autofocus: true,
-        )
-      else
-        div({ class_name: 'view' }, [
-          input(
-            class_name: 'toggle',
-            type: 'checkbox',
-            checked: invoice.completed?,
-            onchange: method(:toggle_invoice),
-          ),
-          label({ ondblclick: method(:edit_invoice) }, invoice.name),
-          button({ class_name: 'destroy', onclick: method(:delete_invoice) }),
-        ])
-      end,
+      div({ class_name: 'view' }, [
+        label(nil, invoice.name),
+        button({ class_name: 'destroy', onclick: method(:delete_invoice) }),
+      ])
     ])
   end
 

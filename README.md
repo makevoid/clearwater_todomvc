@@ -1,4 +1,9 @@
-# Clearwater InvoiceMVC
+# Clearwater TODOMVC
+
+
+TODO MVC, tried to remove the mvc logic and just keep the boilerplate in
+
+need something that lists, filters, creates and edits entries
 
 The [InvoiceMVC](http://invoicemvc.com) project has examples of various front-end frameworks implementing a to-do list.
 

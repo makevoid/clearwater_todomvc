@@ -20,12 +20,6 @@ class InvoiceList
 
   def render
     section({ id: 'main' }, [
-      input(
-        id: 'toggle-all',
-        type: 'checkbox',
-        onchange: method(:toggle_all),
-        checked: invoices.all? { |t| t.completed? },
-      ),
       ul({ id: 'invoice-list' }, invoice_items),
     ])
   end
