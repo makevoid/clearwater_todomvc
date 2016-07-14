@@ -1,4 +1,4 @@
-class Todo
+class Invoice
   attr_reader :id, :name
 
   def initialize(name, completed: false)

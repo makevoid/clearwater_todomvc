@@ -1,4 +1,4 @@
-require './todo_mvc'
+require './try_clearwater'
 
 use Rack::Deflater
-run TodoMVC
+run TryClearwater

@@ -1,6 +1,6 @@
-# Clearwater TodoMVC
+# Clearwater InvoiceMVC
 
-The [TodoMVC](http://todomvc.com) project has examples of various front-end frameworks implementing a to-do list.
+The [InvoiceMVC](http://invoicemvc.com) project has examples of various front-end frameworks implementing a to-do list.
 
 This application uses the [Clearwater](https://github.com/clearwater-rb/clearwater) framework.
 

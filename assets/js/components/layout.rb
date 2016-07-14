@@ -1,69 +1,50 @@
-require 'components/todo_list'
+require 'components/invoice_list'
 
 class Layout
   include Clearwater::Component
 
   def render
     div(nil, [
-      header({ id: 'header' }, [
-        h1(nil, 'todos'),
+      div([
         input(
-          id: 'new-todo',
-          placeholder: 'What needs to be done?',
-          onkeydown: method(:handle_new_todo_key_down),
+          id: 'new-invoice',
+          placeholder: '...',
+          onkeydown: method(:handle_new_invoice_key_down),
           autofocus: true
         ),
       ]),
 
-      (outlet || todo_list),
+      (outlet || invoice_list),
 
       footer,
     ])
   end
 
-  def todo_list
-    TodoList.new(
-      Store.state[:todos],
-      Store.state[:editing_todos]
+  def invoice_list
+    InvoiceList.new(
+      Store.state[:invoices],
+      Store.state[:editing_invoices]
     )
   end
 
-  def add_todo name
-    Store.dispatch Actions::AddTodo.new(Todo.new(name))
+  def add_invoice name
+    Store.dispatch Actions::AddInvoice.new( Invoice.new name )
   end
 
-  def handle_new_todo_key_down event
+  def handle_new_invoice_key_down event
     case event.code
     when 13 # Enter/Return
-      add_todo(event.target.value)
-      event.target.clear
-    when 27 # Esc
+      add_invoice(event.target.value)
       event.target.clear
     end
   end
 
   def footer
-    active_count = Store.state[:todos].count(&:active?)
+    active_count = Store.state[:invoices].count &:active?
 
-    tag('footer#footer', nil, [
-      span({ id: 'todo-count' }, [
-        strong(nil, active_count),
-        " todo#{'s' unless active_count == 1} left"
-      ]),
-      ul({ id: 'filters' }, [
-        li(Link.new({ href: '/' }, 'All')),
-        li(Link.new({ href: '/active' }, 'Active')),
-        li(Link.new({ href: '/completed' }, 'Completed')),
-      ]),
-      clear_button
+    ul(nil, [
+      li(Link.new({ href: '/' },       'All')),
+      li(Link.new({ href: '/active' }, 'Active')),
     ])
-  end
-
-  def clear_button
-    button({ id: 'clear-completed', onclick: method(:clear_completed) }, 'Clear completed')
-  end
-
-  def clear_completed
-    Store.dispatch Actions::ClearCompletedTodos.new
   end
 end
