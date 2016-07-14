@@ -1,6 +1,5 @@
 class InvoiceItem
   include Clearwater::Component
-  include Clearwater::CachedRender
 
   attr_reader :invoice
 
@@ -8,20 +7,11 @@ class InvoiceItem
     @invoice = invoice
   end
 
-  # interesting
-  #
-  # def should_render? previous
-  #   !(
-  #     invoice.equal?(previous.invoice) &&
-  #     editing? == previous.editing?
-  #   )
-  # end
-
   def render
     div([
       div({ class_name: 'view' }, [
         label(nil, invoice.name),
-        button({ class_name: 'destroy', onclick: method(:delete_invoice) }),
+        button({ class_name: 'destroy', onclick: method(:delete_invoice) }, "x"),
       ])
     ])
   end
@@ -36,4 +26,16 @@ class InvoiceItem
       Store.dispatch Actions::RenameInvoice.new(invoice, event.target.value)
     end
   end
+
+  #  very interesting for optimizations (render calls cache)
+  #
+  #  include Clearwater::CachedRender
+  #
+  #
+  # def should_render? previous
+  #   !(
+  #     invoice.equal?(previous.invoice) &&
+  #     editing? == previous.editing?
+  #   )
+  # end
 end

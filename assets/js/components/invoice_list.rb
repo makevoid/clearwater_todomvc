@@ -2,7 +2,7 @@ require 'components/invoice_item'
 
 class InvoiceList
   include Clearwater::Component
-  include Clearwater::CachedRender
+  # include Clearwater::CachedRender
 
   attr_reader :invoices
 

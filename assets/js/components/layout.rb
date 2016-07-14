@@ -7,10 +7,10 @@ class Layout
     div(nil, [
       div([
         input(
-          id: 'new-invoice',
+          id:          'new-invoice',
           placeholder: '...',
-          onkeydown: method(:handle_new_invoice_key_down),
-          autofocus: true
+          onkeydown:   method(:handle_new_invoice_key_down),
+          autofocus:   true
         ),
       ]),
 
@@ -39,11 +39,14 @@ class Layout
   end
 
   def footer
-    active_count = Store.state[:invoices].count &:active?
+    count = Store.state[:invoices].count
 
-    ul(nil, [
-      li(Link.new({ href: '/' },         'All')),
-      li(Link.new({ href: '/filtered' }, 'Filtered')),
+    div(nil, [
+      strong(nil, count),
+      ul(nil, [
+        li(Link.new({ href: '/' },         'All')),
+        li(Link.new({ href: '/filtered' }, 'Filtered')),
+      ]),
     ])
   end
 end

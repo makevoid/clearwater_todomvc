@@ -4,7 +4,7 @@ initial_state = {
 
 
 Store = GrandCentral::Store.new(initial_state) do |state, action|
-  puts "ACTION: #{action.class.name}"
+  puts "ACTION: #{action.class.name} - invoice: #{action.invoice.name if action.invoice}"
 
   case action
   when Actions::AddInvoice
@@ -19,8 +19,8 @@ Store = GrandCentral::Store.new(initial_state) do |state, action|
         invoice
       end
     }
-  when Actions::ClearCompletedInvoices
-    state.merge invoices: state[:invoices].reject(&:completed?)
+  when Actions::FilteredInvoices
+    state.merge invoices: state[:invoices].reject(&:filtered?)
   else
     state
   end

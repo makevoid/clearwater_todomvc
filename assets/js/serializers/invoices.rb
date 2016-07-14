@@ -12,8 +12,7 @@ class InvoicesSerializer
     invoices.map { |invoice|
       {
         id: invoice.id,
-        name: invoice.name,
-        completed: invoice.completed?,
+        name: invoice.name
       }
     }.to_json
   end

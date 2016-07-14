@@ -2,7 +2,7 @@ require 'components/invoice_list'
 
 class InvoiceFilteredList < InvoiceList
   def invoices
-    super.select(&:active?)
+    super.select(&:filtered?)
   end
 end
 
