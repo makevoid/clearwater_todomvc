@@ -4,17 +4,18 @@ class InvoiceItem
 
   attr_reader :invoice
 
-  def initialize invoice, editing
+  def initialize invoice
     @invoice = invoice
-    @editing = editing
   end
 
-  def should_render? previous
-    !(
-      invoice.equal?(previous.invoice) &&
-      editing? == previous.editing?
-    )
-  end
+  # interesting
+  #
+  # def should_render? previous
+  #   !(
+  #     invoice.equal?(previous.invoice) &&
+  #     editing? == previous.editing?
+  #   )
+  # end
 
   def render
     div([
@@ -25,22 +26,6 @@ class InvoiceItem
     ])
   end
 
-  def toggle_invoice
-    Store.dispatch Actions::ToggleInvoice.new(invoice)
-  end
-
-  def edit_invoice
-    Store.dispatch Actions::EditInvoice.new(invoice)
-  end
-
-  def editing?
-    @editing
-  end
-
-  def done_editing!
-    Store.dispatch Actions::DoneEditingInvoice.new(invoice)
-  end
-
   def delete_invoice
     Store.dispatch Actions::DeleteInvoice.new(invoice)
   end
@@ -49,9 +34,6 @@ class InvoiceItem
     case event.code
     when 13 # Enter
       Store.dispatch Actions::RenameInvoice.new(invoice, event.target.value)
-      done_editing!
-    when 27 # Esc
-      done_editing!
     end
   end
 end

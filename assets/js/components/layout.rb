@@ -22,8 +22,7 @@ class Layout
 
   def invoice_list
     InvoiceList.new(
-      Store.state[:invoices],
-      Store.state[:editing_invoices]
+      Store.state[:invoices]
     )
   end
 
@@ -43,8 +42,8 @@ class Layout
     active_count = Store.state[:invoices].count &:active?
 
     ul(nil, [
-      li(Link.new({ href: '/' },       'All')),
-      li(Link.new({ href: '/active' }, 'Active')),
+      li(Link.new({ href: '/' },         'All')),
+      li(Link.new({ href: '/filtered' }, 'Filtered')),
     ])
   end
 end
