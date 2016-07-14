@@ -4,6 +4,9 @@ TODO MVC, tried to remove the mvc logic and just keep the boilerplate in
 
 need something that lists, filters, creates and edits entries
 
+why invoices and not apples and oranges?
+
+I don't know, it sounded a serious business naming the items invoices :rolleyes:
 
 ## Running the application
 
